@@ -18,7 +18,7 @@ const Navbar = () => {
     { href: "/#testimonials", label: "Testimonials" },
     { href: "/analytics", label: "Analytics" },
     { href: "/contact", label: "Contact" },
-    { href: "/contributors", label: "Contributors"}
+    { href: "/contributors", label: "Contributors" }
   ];
 
   // Reset activeLink to home when on home page
@@ -95,12 +95,14 @@ const Navbar = () => {
               className="w-4 h-4 bg-red-500 rounded-full -ml-2 hover:opacity-75 transition-opacity"
             ></motion.div>
           </div>
-          <motion.span
-            whileHover={{ scale: 1.02 }}
-            className="text-xl font-bold text-gray-800 hover:text-blue-600 transition-colors"
-          >
-            BizFlow
-          </motion.span>
+          <Link to="/">
+            <motion.span
+              whileHover={{ scale: 1.02 }}
+              className="text-xl font-bold text-gray-800 hover:text-blue-600 transition-colors"
+            >
+              BizFlow
+            </motion.span>
+          </Link>
         </motion.div>
 
         {/* Mobile Menu Button */}
@@ -138,50 +140,47 @@ const Navbar = () => {
                       document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
                     }
                   }}
-                  className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all cursor-pointer ${
-                    activeLink === link.href
+                  className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all cursor-pointer ${activeLink === link.href
                       ? "text-blue-600 after:w-full"
                       : "text-gray-600 hover:text-gray-900"
-                  }`}
+                    }`}
                 >
                   {link.label}
                 </button>
               );
             }
-            
-                         return link.href.includes("/#") ? (
-               <HashLink
-                 key={index}
-                 smooth
-                 to={link.href}
-                 onClick={() => {
-                   // Only update activeLink for section navigation if we're NOT on home page
-                   if (window.location.pathname !== "/") {
-                     setActiveLink(link.href);
-                   }
-                 }}
-                 className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${
-                   activeLink === link.href
-                     ? "text-blue-600 after:w-full"
-                     : "text-gray-600 hover:text-gray-900"
-                 }`}
-               >
-                 {link.label}
-               </HashLink>
-             ) : (
-               <Link
-                 key={index}
-                 to={link.href}
-                 onClick={() => setActiveLink(link.href)}
-                 className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${
-                   window.location.pathname === link.href
-                     ? "text-blue-600 after:w-full"
-                     : "text-gray-600 hover:text-gray-900"
-                 }`}
-               >
-                 {link.label}
-               </Link>
-             );
+
+            return link.href.includes("/#") ? (
+              <HashLink
+                key={index}
+                smooth
+                to={link.href}
+                onClick={() => {
+                  // Only update activeLink for section navigation if we're NOT on home page
+                  if (window.location.pathname !== "/") {
+                    setActiveLink(link.href);
+                  }
+                }}
+                className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${activeLink === link.href
+                    ? "text-blue-600 after:w-full"
+                    : "text-gray-600 hover:text-gray-900"
+                  }`}
+              >
+                {link.label}
+              </HashLink>
+            ) : (
+              <Link
+                key={index}
+                to={link.href}
+                onClick={() => setActiveLink(link.href)}
+                className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${window.location.pathname === link.href
+                    ? "text-blue-600 after:w-full"
+                    : "text-gray-600 hover:text-gray-900"
+                  }`}
+              >
+                {link.label}
+              </Link>
+            );
           })}
         </motion.div>
 
@@ -235,56 +234,53 @@ const Navbar = () => {
                         document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
                       }
                     }}
-                    className={`block text-sm font-medium py-2 cursor-pointer w-full text-left ${
-                      activeLink === link.href
+                    className={`block text-sm font-medium py-2 cursor-pointer w-full text-left ${activeLink === link.href
                         ? "text-blue-600"
                         : "text-gray-600 hover:text-gray-900"
-                    }`}
+                      }`}
                   >
                     {link.label}
                   </button>
                 );
               }
-              
-                             return link.href.includes("/#") ? (
-                 <HashLink
-                   key={index}
-                   smooth
-                   to={link.href}
-                   onClick={() => {
-                     // Only update activeLink for section navigation if we're NOT on home page
-                     if (window.location.pathname !== "/") {
-                       setActiveLink(link.href);
-                     }
-                     setIsMenuOpen(false);
-                   }}
-                   className={`block text-sm font-medium py-2 cursor-pointer
-                   ${
-                     activeLink === link.href
-                       ? "text-blue-600"
-                       : "text-gray-600 hover:text-gray-900"
-                   }`}
-                 >
-                   {link.label}
-                 </HashLink>
-               ) : (
-                 <Link
-                   key={index}
-                   to={link.href}
-                   onClick={() => {
-                     setActiveLink(link.href);
-                     setIsMenuOpen(false);
-                   }}
-                   className={`block text-sm font-medium py-2 cursor-pointer
-                     ${
-                       window.location.pathname === link.href
-                         ? "text-blue-600"
-                         : "text-gray-600 hover:text-gray-900"
-                     }`}
-                 >
-                   {link.label}
-                 </Link>
-               );
+
+              return link.href.includes("/#") ? (
+                <HashLink
+                  key={index}
+                  smooth
+                  to={link.href}
+                  onClick={() => {
+                    // Only update activeLink for section navigation if we're NOT on home page
+                    if (window.location.pathname !== "/") {
+                      setActiveLink(link.href);
+                    }
+                    setIsMenuOpen(false);
+                  }}
+                  className={`block text-sm font-medium py-2 cursor-pointer
+                   ${activeLink === link.href
+                      ? "text-blue-600"
+                      : "text-gray-600 hover:text-gray-900"
+                    }`}
+                >
+                  {link.label}
+                </HashLink>
+              ) : (
+                <Link
+                  key={index}
+                  to={link.href}
+                  onClick={() => {
+                    setActiveLink(link.href);
+                    setIsMenuOpen(false);
+                  }}
+                  className={`block text-sm font-medium py-2 cursor-pointer
+                     ${window.location.pathname === link.href
+                      ? "text-blue-600"
+                      : "text-gray-600 hover:text-gray-900"
+                    }`}
+                >
+                  {link.label}
+                </Link>
+              );
             })}
             <motion.button
               variants={fadeIn("up", 0.4)}
